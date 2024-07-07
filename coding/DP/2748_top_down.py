@@ -15,4 +15,3 @@ def f(n):
 
 print(f(N))
 
-
