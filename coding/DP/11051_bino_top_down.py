@@ -1,3 +1,5 @@
+import sys
+sys.setrecursionlimit(10**6)
 N, K = map(int, input().split(' '))
 dp_table = [[-1] * (N + 1) for _ in range(N + 1)]
 dp_table[0][0] = 1
