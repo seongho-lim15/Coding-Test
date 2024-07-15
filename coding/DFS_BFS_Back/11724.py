@@ -1,34 +1,31 @@
 from collections import deque
 from sys import stdin
+import sys
+
+sys.setrecursionlimit(10**6)
 
 N, M = map(int, stdin.readline().split(" "))
 graph = [[0]*N for _ in range(N)]
 
-for i in range(M):
+for index in range(M):
     u, v = map(int, stdin.readline().split(" "))
     graph[u-1][v-1] = graph[v-1][u-1] = 1
 
-def dfs():
+chk_list = [-1] * N
+count = 0
 
-    set_list = []
-    count = 0
-    q = deque()
+def dfs(node_idx):
+    global count
+    chk_list[node_idx] = 1
 
-    for i in range(N):
-        q.append(i)
-        chk = set()
+    for new_node_idx in range(N):
+        if graph[node_idx][new_node_idx] == 1:
+            if chk_list[new_node_idx] == -1:
+                dfs(new_node_idx)
 
-        while len(q) > 0:
-            node = q.popleft()
-            chk.add(node)
-            for i in range(N):
-                if graph[node][i] == 1 and i not in chk :
-                    q.append(i)
-        # print(chk)
-        if chk not in set_list:
-            count += 1
-            set_list.append(chk)
+for index in range(N):
+    if chk_list[index] == -1:
+        count +=1
+        dfs(index)
 
-    return count
-
-print(dfs())
+print(count)
