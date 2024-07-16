@@ -6,7 +6,7 @@ que = deque()
 chars = []
 graph = [[] for _ in range(N)]
 chk_graph = [[0]*M for _ in range(N)]
-
+node_count = [[0]*M for _ in range(N)]
 
 for idx in range(N):
     for char in input():
@@ -24,19 +24,24 @@ def is_valid(y, x):
 
 count = 0
 que.append((0,0))
+chk_graph[0][0] = 1
+node_count[0][0] = 1
+
 
 while len(que) > 0:
     y, x = que.popleft()
-    print(f'y : {y}, x:{x}')
+
     for i in range(4):
         new_y = y + dy[i]
         new_x = x + dx[i]
 
         if is_valid(new_y, new_x):
             count = count + 1
-            chk_graph[new_y][new_x] = 1
+            node_count[new_y][new_x] = node_count[y][x] + 1
             que.append((new_y, new_x))
+            chk_graph[new_y][new_x] = 1
             if new_y == N-1 and new_x == M-1:
-                print(f'count : {count}')
+                # print(f'node_count : {node_count[new_y][new_x]}')
+                print(node_count[new_y][new_x])
 
 
