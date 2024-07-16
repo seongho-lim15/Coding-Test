@@ -11,7 +11,7 @@ chk_graph = [[0]*M for _ in range(N)]
 for idx in range(N):
     for char in input():
         chars.append(char)
-        graph[idx].append(char)
+        graph[idx].append(int(char))
 
 dy = [0, 1, 0, -1]
 dx = [1, 0, -1, 0]
@@ -27,7 +27,7 @@ que.append((0,0))
 
 while len(que) > 0:
     y, x = que.popleft()
-    print(f'y:{y}, x:{x}')
+    print(f'y : {y}, x:{x}')
     for i in range(4):
         new_y = y + dy[i]
         new_x = x + dx[i]
@@ -37,7 +37,6 @@ while len(que) > 0:
             chk_graph[new_y][new_x] = 1
             que.append((new_y, new_x))
             if new_y == N-1 and new_x == M-1:
-                print(f'y : {new_y}, x : {new_x}')
                 print(f'count : {count}')
 
 
