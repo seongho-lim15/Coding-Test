@@ -22,31 +22,24 @@ while len(que) > 0:
 
     # 현 위치가 K 가 되었을 때, correct_cnt 추가
     if now_sts[0] == K:
-        print(f'now_position : {now_sts}')
+        # print(f'now_position : {now_sts}')
         correct_position_cnt =  now_sts[1]
         correct_cnt = correct_cnt + 1
     else:
         # 현재 위치
         now_pstn = now_sts[0]
-        if 0<= now_pstn - 1 <= 100000:
+        if 0<= now_pstn - 1 <= 100000 and prev_positions[now_pstn - 1] == 0:
             # 갈 수 있는 위치면, que 에 추가
             que.append((now_sts[0] - 1, now_sts[1] + 1, *now_sts[2:], now_sts[0] - 1))
-            # que.append((now_pstn - 1, now_sts[1] + 1))
             # 지나간 경로에 추가
-            prev_positions[now_pstn - 1] = 1
-        if 0<= now_pstn + 1 <= 100000:
-            que.append((now_sts[0] + 1, now_sts[1] + 1, *now_sts[2:], now_sts[0] + 1))
-            prev_positions[now_pstn + 1] = 1
-        if 0<= now_pstn * 2 <= 100000:
-            que.append((now_sts[0] * 2, now_sts[1] + 1, *now_sts[2:], now_sts[0] * 2))
-            prev_positions[now_pstn * 2] = 1
+            if now_pstn - 1 != K:
+                prev_positions[now_pstn - 1] = 1
 
-        # if 0<= now - 1 <= 100000 and pre_position[now - 1] == 0:
-        #     que.append((now - 1, now_position[1] + 1))
-        #     pre_position[now - 1] = 1
-        # if 0<= now + 1 <= 100000 and pre_position[now + 1] == 0:
-        #     que.append((now + 1, now_position[1] + 1))
-        #     pre_position[now + 1] = 1
-        # if 0<= now * 2 <= 100000 and pre_position[now * 2] == 0:
-        #     que.append((now * 2, now_position[1] + 1))
-        #     pre_position[now * 2] = 1
+        if 0<= now_pstn + 1 <= 100000 and prev_positions[now_pstn + 1] == 0:
+            que.append((now_sts[0] + 1, now_sts[1] + 1, *now_sts[2:], now_sts[0] + 1))
+            if now_pstn + 1 != K:
+                prev_positions[now_pstn + 1] = 1
+        if 0<= now_pstn * 2 <= 100000 and prev_positions[now_pstn *2] == 0:
+            que.append((now_sts[0] * 2, now_sts[1] + 1, *now_sts[2:], now_sts[0] * 2))
+            if now_pstn *2 != K:
+                prev_positions[now_pstn * 2] = 1
