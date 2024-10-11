@@ -11,6 +11,6 @@ for i in range(N):
     input_arr.insert(1, i+1)
     hq.heappush(pq, input_arr)
 
-while(pq):
+while pq:
     name = hq.heappop(pq)
     print(f'{name[0]} {name[2]}')

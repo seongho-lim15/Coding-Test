@@ -27,7 +27,6 @@ def insertSort():
 def biInsertSort():
     def biInsert(idx):
 
-
     for i in range(N):
         input_num = int(sys.stdin.readline())
 
