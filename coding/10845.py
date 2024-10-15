@@ -32,10 +32,7 @@ for i in range(N):
         if len(que)>0:
             first_num = que[0]
             print(first_num)
-            new_que = []
-            for idx in range(1, len(que)):
-                new_que.append(que[idx])
-            que = new_que
+            que = que[1:]
         else:
             print(-1)
 
